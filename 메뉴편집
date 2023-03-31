@@ -1,0 +1,127 @@
+import axios from 'axios';
+import React from 'react'
+import './Weathertest.css'
+
+
+const Weathertest = () => {
+
+  return (
+    <div className='wrap'>
+
+      <button onClick={()=>{axios.get('https://api.openweathermap.org/data/2.5/weather?lat=36.3333&lon=127.4167&appid=f97e7ef1034e0c950eb56df741876340&units=metric')
+        .then((result)=>{
+        console.log(result.data.weather[0].main);
+        console.log(result.data.main.temp_max);
+        console.log((result.data.main.temp_max-10).toFixed(2));
+        })
+        }}>날씨 보기</button>
+
+      <button onClick={()=>{axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=69MDcrrkbf0Z3ZW4LFyqSZ%2BLToQPK3vjVrDrzz3qtpGyGG2JezYDMin%2FLsyv3NWBK%2BejgMVU4p879wUSlznU1Q%3D%3D&returnType=json&numOfRows=100&pageNo=1&sidoName=%EB%8C%80%EC%A0%84&ver=1.0')
+        .then((result)=>{
+
+        console.log(result.data.response.body.items[11].pm10Value);
+        console.log(result.data.response.body.items[11].pm25Value);
+        })
+        }}>둔산동 미세먼지 보기</button>
+
+       ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+       <button onClick={()=>{}}>메뉴 편집 버튼</button>
+
+        {/* 1. 메뉴 편집 버튼 누르면 뒤의 배경이 어두워지면서(완료) 
+        메뉴 편집화면이 뜨게
+        2. 근데 각 메뉴 화면 아이콘 오른쪽 위에는 v자 체크가 있게
+        3. 누르면 어두워지면서 선택이 안 되게
+        4. 저장 누르면 화면에 보이는 메뉴가 바뀌게
+        5. 빡세네 */}
+
+        <div className='menu-box'>
+          <button>버튼1</button>
+          <button>버튼2</button>
+          <button>버튼3</button>
+          <button>버튼4</button>
+          <button>버튼5</button>
+          <button onClick={()=>{
+            document.querySelector(".overlay").classList.add('is-active');
+            document.querySelector(".pop-up-menu").classList.add('is-active');
+          }}>설정</button>
+        </div>
+          {/* 버튼은 토글로 selected 클래스 명을 쉽게 선택할 수 있게 하자.
+           */}
+          {/* 우선 기본적으로 다 selected로 클래스명을 짓자.
+          그 다음에 x 누르면 클래스명 삭제
+          그리고 남은 selected 버튼 선택한 것을 메뉴박스로 보내자.
+          근데 메뉴박스로 보낼 때 메뉴 박스 안에 있는 태그들 다 삭제하고
+          선택된 애들 classname = selected 로만 대체가 되게 만들자. */}
+
+        <div className='pop-up-menu'>
+          <button className='selected'>asdf</button>
+          <button className='selected'>zxcv</button>
+          <button >qwer</button>
+          <button >aswqerdf</button>
+          <button onClick={()=>{
+            // 선택된 애들 변수선언, 그리고 어레이로 바꾼다.
+            const selection =document.querySelectorAll(".selected");
+            console.log(selection[0]); // => 여기 노드리스트로 뜨는데 이게 뭔지... querySelector일 때는 사실 잘 나왔는데 뭐가 문젠지 참..
+            // let selectarray = Array.from(selection);
+            // console.log(selectarray);
+            let selectcollection = [];
+
+            // 선택된 애들 깊은 복사하기 -> querySelectorAll 리스트를 내뱉기 때문에 selectarray를 포반복문 돌려버리자.
+            // for(let i = 0; i < selectarray.length; i++){
+            for(let i = 0; i < selection.length; i++){
+              selectcollection.push(selection[i].innerHTML);
+              // selectcollection.push(selectarray[i].cloneNode(true)); ->
+            }
+
+            console.log(selectcollection);
+
+            // const newSelection = selection.cloneNode(true);-> 이건 실패한 거 딱 한개만 복사를 해서
+
+            // 위의 메뉴박스 변수 선언
+            const menubox = document.querySelector(".menu-box")
+
+            // 위의 기본 선택된 메뉴박스의 자식들을 완전 제거하는 것
+            menubox.replaceChildren();
+
+            // 빈 메뉴박스에 selected 된 것들 넣기 -> 위 selectarray[i].cloneNode(true);가 여러개 만들어지니 이걸 어레이에 넣고 
+            // menubox.append(selectcollection);
+            selection.forEach((ele) => {
+              menubox.innerHTML += ele.outerHTML;
+            })
+
+            // += 맨 끝에 추가하는 것. append는 객체 기준으로 뒤에 넣어준다. innerhtml은 html 기준. 
+            // menubox.append(`<button>${selectcollection}</button>`); ->outerHTML 태그까지 같이 받아오는 거 아까 오류는 형태만 받아와서 그렇다.
+
+            // 그 다음 옆에 설정버튼 추가
+            // menubox.append(<button onClick={()=>{
+            //   document.querySelector(".overlay").classList.add('is-active');
+            //   document.querySelector(".pop-up-menu").classList.add('is-active');
+            // }}>설정</button>); 리액트 객체 복사를 기준으로 찾아보자.
+
+            // const addButton = document.createElement('button');
+            // addButton.textContent = '설정';
+
+            // addButton.addEventListener('click', () => {
+            //   document.querySelector('.overlay').classList.add('is-active');
+            //   document.querySelector('.pop-up-menu').classList.add('is-active');
+            // });
+            
+            // menubox.appendChild(addButton);
+
+
+
+            // 그 다음 페이드아웃하기-> 이건 리무브 클래스로 하면 될 듯
+            document.querySelector(".overlay").classList.remove('is-active');
+            document.querySelector(".pop-up-menu").classList.remove('is-active');
+
+          }}>저장하기</button>
+        </div>
+
+        <div className='overlay'></div>  
+
+    </div>
+  )
+}
+
+export default Weathertest
