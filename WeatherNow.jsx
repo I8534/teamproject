@@ -50,15 +50,29 @@ const WeatherNow = () => {
 
 
   let image_dust;
-  if (pm10 > 150 || pm25 > 75) {
+  if (pm10 > 150) {
     image_dust = "./teamproject-img-main/icon/finedust-red.png";
-  } else if (pm10 > 80 || pm25 > 35) {
+  } else if (pm10 > 80) {
     image_dust = "./teamproject-img-main/icon/finedust-orange.png";
-  } else if (pm10 > 30 || pm25 > 15) {
+  } else if (pm10 > 30) {
     image_dust = "./teamproject-img-main/icon/finedust-green.png";
   } else {
     image_dust = "./teamproject-img-main/icon/finedust-blue.png";
   }
+
+  let image_dust2;
+  if (pm25 > 75) {
+    image_dust2 = "./teamproject-img-main/icon/finedust-red.png";
+  } else if (pm25 > 35) {
+    image_dust2 = "./teamproject-img-main/icon/finedust-orange.png";
+  } else if (pm25 > 15) {
+    image_dust2 = "./teamproject-img-main/icon/finedust-green.png";
+  } else {
+    image_dust2 = "./teamproject-img-main/icon/finedust-blue.png";
+  }
+
+
+
 
   let image_weath;
   if (weath == 'Clear') {
@@ -98,15 +112,23 @@ const WeatherNow = () => {
 
   return (
     <div>
-      <div className='white-box'>
-          <img className="dust-box" src={image_dust} alt="Air Pollution" />
+      <div className='box'>
+        <div className='small-box1'>
           <img className='weather-box' src={image_weath} alt="weather condition" />
-          <p>{weath_condition}</p>
-          <p>미세 : {pm10}</p>
-          <p>초미세 : {pm25}</p>
           <p>현재온도 : {temp}</p>
-          <p>온도 : {(temp-20).toFixed(2)}/{temp+3}℃</p>
-          <p>날씨 : {weath}</p>
+          <p>{weath_condition}</p>
+          <p>{(temp-20).toFixed(2)}°</p>
+          <p>{temp+3}°</p>
+          <p>대전광역시</p>
+        </div>
+
+        <div className='small-box2'>
+          <p>미세</p>
+          <img className="dust-box" src={image_dust} alt="Air Pollution" />
+          <p>초미세</p>
+          <img className="dust-box2" src={image_dust2} alt="Air Pollution2" />
+          <p>대전광역시</p>
+        </div>
       </div>
     </div>
   )
@@ -119,4 +141,3 @@ export default WeatherNow;
           <p>PM2.5: {pm25}</p>
           <p>온도: {temp-18}/{temp}℃</p>
           <p>날씨: {weath}</p> */}
-
