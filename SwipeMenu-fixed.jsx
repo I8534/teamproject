@@ -48,56 +48,56 @@ const SwipeMenu = () => {
     // 여긴 로컬스토리지가 변할 때 어떻게 보여줄지 결정하는 곳인데 
     // 내일 실행시켜봐서 별 문제 없으면 그냥 없에버리자.
 
-  useEffect(() => {
-    // 로컬스토리지 렝스 반영해서 우선 너비 스테이트를 변경시키자..
-    setSaveCheckedLength(JSON.parse(localStorage.getItem('saveChecked')));
+  // useEffect(() => {
+  //   // 로컬스토리지 렝스 반영해서 우선 너비 스테이트를 변경시키자..
+  //   setSaveCheckedLength(JSON.parse(localStorage.getItem('saveChecked')));
 
-    // 로컬스토리지 안에 값이 있고 그 갯수가 0개 이상 8개 이하인 경우는 좌우 버튼이 안 먹히고, 메뉴들을 가운데에 있게 하자.
-    if (0< saveCheckedLength < 8) {
+  //   // 로컬스토리지 안에 값이 있고 그 갯수가 0개 이상 8개 이하인 경우는 좌우 버튼이 안 먹히고, 메뉴들을 가운데에 있게 하자.
+  //   if (0< saveCheckedLength < 8) {
 
-      // 잠만 이렇게 할 필요가 없는 것이... 그냥 모달창 입력하면 되자나 병신아.
+  //     // 잠만 이렇게 할 필요가 없는 것이... 그냥 모달창 입력하면 되자나 병신아.
 
       
 
-      //-> 기존 값을 없에고 다시 덮어쓰기 때문에 잘못하면 계속 반복되기 때문에 주의해서 하자.
-      // 우선 menu-box2 안을 비우자.
-      document.querySelector('.menu-box2').innerText = '';
+  //     //-> 기존 값을 없에고 다시 덮어쓰기 때문에 잘못하면 계속 반복되기 때문에 주의해서 하자.
+  //     // 우선 menu-box2 안을 비우자.
+  //     document.querySelector('.menu-box2').innerText = '';
 
-      // 이미지번호에 입력을 시켜버리자. -> 이건 포이치 함수로 세이브드체크 갯수만큼 돌려버리자.
-      // 그리고 이걸 div에 입력시키자.
-      saveCheckedLength.map((item, i)=>{
-        document.querySelector('.menu-box2').innerHTML += `<img className='menu-img' src="./teamproject-img-main/icon/service (${item}).png" alt="" />`; // innerText 대신 innerHTML을 사용하여 img 태그 추가
-      });
+  //     // 이미지번호에 입력을 시켜버리자. -> 이건 포이치 함수로 세이브드체크 갯수만큼 돌려버리자.
+  //     // 그리고 이걸 div에 입력시키자.
+  //     saveCheckedLength.map((item, i)=>{
+  //       document.querySelector('.menu-box2').innerHTML += `<img className='menu-img' src="./teamproject-img-main/icon/service (${item}).png" alt="" />`; // innerText 대신 innerHTML을 사용하여 img 태그 추가
+  //     });
 
-      // 그리고 화살표 방향에 함수를 빼버리자.
-      document.querySelector('.arrow1').outerHTML = "<img className='arrow1' src='./teamproject-img-main/icon/made-icon-left.png' alt='뒤로' />";
-      document.querySelector('.arrow2').outerHTML = "<img className='arrow2' src='./teamproject-img-main/icon/made-icon-right.png' alt='앞으로' />";
+  //     // 그리고 화살표 방향에 함수를 빼버리자.
+  //     document.querySelector('.arrow1').outerHTML = "<img className='arrow1' src='./teamproject-img-main/icon/made-icon-left.png' alt='뒤로' />";
+  //     document.querySelector('.arrow2').outerHTML = "<img className='arrow2' src='./teamproject-img-main/icon/made-icon-right.png' alt='앞으로' />";
 
 
-      // 그리고  style2에도 변화를 주자. 이미지들을 가운데로 모아버리자.
+  //     // 그리고  style2에도 변화를 주자. 이미지들을 가운데로 모아버리자.
 
-      setStyle2({
-        justifyContent: `center`
-      });
+  //     setStyle2({
+  //       justifyContent: `center`
+  //     });
 
-    }  else if(localStorage.getItem('saveChecked') == null) {
-      // 만약 로컬스토리지가 널이라면 이 스타일을 적용할 것이다. 즉 맨 처음 스타일을 적용시킬 것이다.
+  //   }  else if(localStorage.getItem('saveChecked') == null) {
+  //     // 만약 로컬스토리지가 널이라면 이 스타일을 적용할 것이다. 즉 맨 처음 스타일을 적용시킬 것이다.
 
-      setStyle({
-        transform: `translateX(${1 - currentImgIndex}%)`,
-        width : `calc(200px*5)`
-      });
+  //     setStyle({
+  //       transform: `translateX(${1 - currentImgIndex}%)`,
+  //       width : `calc(200px*5)`
+  //     });
       
-      setStyle2(null)
+  //     setStyle2(null)
 
-    } else if(localStorage.length && length > 8) {
-      // 만약 로컬스토리지 값이 9개 이상이면 스타일을 다르게 적용시킬 것이다.
-
-
-    }
+  //   } else if(localStorage.length && length > 8) {
+  //     // 만약 로컬스토리지 값이 9개 이상이면 스타일을 다르게 적용시킬 것이다.
 
 
-  }, [localStorage.getItem("saveChecked")]);
+  //   }
+
+
+  // }, [localStorage.getItem("saveChecked")]);
 
 
 
