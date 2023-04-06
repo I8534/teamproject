@@ -1,0 +1,46 @@
+.frontBox {
+  background-color: #f3faff;
+}
+
+.count_number {
+  /* border: 1px solid red; */
+}
+
+.time-box {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.time-box p {
+  margin-right: 75px;
+}
+
+.corona-box {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-box {
+  width: 320px;
+  height: 150px;
+  text-align: center;
+}
+
+.number {
+  margin: 0;
+  font-size: 50px;
+  color: #193c89;
+}
+
+.national-death {
+  margin: 0 150px;
+  border-left: 5px solid white; 
+  border-right: 5px solid white; 
+}
+
+.letter {
+  font-weight: 700;
+}
