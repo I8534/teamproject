@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+.arrow {
+    width: 25px;
+    height: 25px;
+    z-index: 3;
+}
+
+.menu-box {
+    width: 400px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    /* overflow: hidden; */
+    z-index: 2;
+}
+
+.setting {
+    width: 35px;
+    height: 35px;
+}
+
