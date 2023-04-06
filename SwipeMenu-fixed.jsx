@@ -3,6 +3,7 @@ import './SwipeMenu.css'
 import Img from './component/Img';
 
 
+
 const SwipeMenu = () => {
 
 
@@ -18,7 +19,7 @@ const SwipeMenu = () => {
     } else {
       localStorage.setItem("saveChecked", null);
     }
-  }, [saveCheckedLength])
+  }, [localStorage.getItem("saveChecked")])
 
 
 
@@ -46,7 +47,7 @@ const SwipeMenu = () => {
 
     // 여긴 로컬스토리지가 변할 때 어떻게 보여줄지 결정하는 곳인데 
     // 내일 실행시켜봐서 별 문제 없으면 그냥 없에버리자.
-    
+
   useEffect(() => {
     // 로컬스토리지 렝스 반영해서 우선 너비 스테이트를 변경시키자..
     setSaveCheckedLength(JSON.parse(localStorage.getItem('saveChecked')));
